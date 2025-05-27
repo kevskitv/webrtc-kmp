@@ -1,19 +1,19 @@
 package com.shepeliev.webrtckmp
 
 import org.webrtc.AudioSource
-import org.webrtc.AudioTrack
+import org.webrtc.AudioTrack as AndroidAudioTrack
 
-internal class LocalAudioStreamTrack(
-    android: AudioTrack,
+internal class LocalAudioTrack(
+    private val androidTrack: AndroidAudioTrack,
     private val audioSource: AudioSource,
     override val constraints: MediaTrackConstraints,
-) : MediaStreamTrackImpl(android), AudioStreamTrack {
-
+) : MediaStreamTrackImpl(androidTrack),
+    AudioTrack {
     override fun onStop() {
         audioSource.dispose()
     }
 
     override fun setVolume(volume: Double) {
-        (android as AudioTrack).setVolume(volume)
+        androidTrack.setVolume(volume)
     }
 }

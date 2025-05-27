@@ -1,24 +1,26 @@
+@file:OptIn(ExperimentalForeignApi::class)
+
 package com.shepeliev.webrtckmp
 
+import WebRTC.RTCVideoTrack
 import com.shepeliev.webrtckmp.capturer.CameraVideoCapturerController
 import com.shepeliev.webrtckmp.capturer.VideoCapturerController
-import com.shepeliev.webrtckmp.capturer.VideoCapturerErrorListener
-import org.webrtc.VideoTrack
+import kotlinx.cinterop.ExperimentalForeignApi
 
-internal class LocalVideoStreamTrack(
-    android: VideoTrack,
+internal class LocalVideoTrack(
+    ios: RTCVideoTrack,
     private val videoCapturerController: VideoCapturerController,
-) : RenderedVideoStreamTrack(android), VideoStreamTrack {
+) : RenderedVideoTrack(ios),
+    VideoTrack {
     override val settings: MediaTrackSettings get() = videoCapturerController.settings
 
     init {
-        videoCapturerController.videoCapturerErrorListener = VideoCapturerErrorListener { stop() }
         videoCapturerController.startCapture()
     }
 
     override suspend fun switchCamera(deviceId: String?) {
         (videoCapturerController as? CameraVideoCapturerController)?.let { controller ->
-            deviceId?.let { controller.switchCamera(it) } ?: controller.switchCamera()
+            deviceId?.let { controller.switchCamera(deviceId) } ?: controller.switchCamera()
         }
     }
 
@@ -31,6 +33,6 @@ internal class LocalVideoStreamTrack(
     }
 
     override fun onStop() {
-        videoCapturerController.dispose()
+        videoCapturerController.stopCapture()
     }
 }
