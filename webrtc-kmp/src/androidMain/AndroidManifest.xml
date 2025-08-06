@@ -14,7 +14,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.shepeliev.webrtckmp.WebRtcInitializer"
+                android:name="com.github.kevskitv.webrtckmp.WebRtcInitializer"
                 android:value="androidx.startup" />
         </provider>
     </application>

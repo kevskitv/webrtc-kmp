@@ -1,4 +1,4 @@
-# WebRTC KMP ![Maven Central](https://img.shields.io/maven-central/v/com.shepeliev/webrtc-kmp?style=flat-square)
+# WebRTC KMP ![Maven Central](https://img.shields.io/maven-central/v/com.github.kevskitv/webrtc-kmp?style=flat-square)
 
 WebRTC Kotlin Multiplatform SDK is a comprehensive toolkit for integrating WebRTC functionality into your multiplatform projects. 
 It supports Android, iOS, JS. Other platforms - PRs are welcome.
@@ -15,14 +15,14 @@ It supports Android, iOS, JS. Other platforms - PRs are welcome.
 Current revision: M125
 
 ## Installation
-The library is published to [Maven Central](https://search.maven.org/artifact/com.shepeliev/webrtc-kmp).
+The library is published to [Maven Central](https://search.maven.org/artifact/com.github.kevskitv/webrtc-kmp).
 
 
 ### Add dependency to your common source set:
 ```kotlin
 commonMain.dependencies {
   dependencies {
-    implementation("com.shepeliev:webrtc-kmp:$webRtcKmpVersion")
+    implementation("com.github.kevskitv:webrtc-kmp:$webRtcKmpVersion")
   }
 }
 ```

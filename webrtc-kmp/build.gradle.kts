@@ -8,11 +8,12 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     kotlin("native.cocoapods")
+    id("maven-publish")
 }
 
 group = "com.github.kevskitv"
 
-version = "0.130.1"
+version = "0.130.2"
 
 kotlin {
     explicitApi()
@@ -24,7 +25,7 @@ kotlin {
     cocoapods {
         version = project.version.toString()
         summary = "WebRTC Kotlin Multiplatform SDK"
-        homepage = "https://github.com/shepeliev/webrtc-kmp"
+        homepage = "https://github.com/kevskitv/webrtc-kmp"
         ios.deploymentTarget = "13.0"
 
         noPodspec()
@@ -123,7 +124,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.shepeliev.webrtckmp"
+    namespace = "com.github.kevskitv.webrtckmp"
 
     compileSdk = libs.versions.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -146,5 +147,15 @@ android {
     dependencies {
         androidTestImplementation(libs.androidx.test.core)
         androidTestImplementation(libs.androidx.test.runner)
+    }
+}
+
+publishing {
+    publications {
+        withType<MavenPublication> {
+            groupId = "com.github.kevskitv"
+            artifactId = "webrtc-kmp"
+            version = "0.130.2"
+        }
     }
 }
